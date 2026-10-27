@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+
+@source '../views/**/*.blade.php';
+@source '../js/**/*.js';
+@source '../../storage/framework/views/*.php';
+
+/*
+|--------------------------------------------------------------------------
+| Token desain Bungong Kupula
+|--------------------------------------------------------------------------
+| Palet diambil dari dunianya: papan jati berukir, kuningan, benang emas
+| kasab/songket, merah songket, dan hijau daun tanjung.
+| Ubah warna di sini; seluruh situs mengikuti.
+*/
+@theme static {
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-ink-950: #110d09;
+  --color-ink-900: #181210;
+  --color-ink-800: #211914;
+  --color-ink-700: #2d231b;
+  --color-ink-600: #43342a;
+
+  --color-gold-300: #f0d28a;
+  --color-gold-400: #e6b94f;
+  --color-gold-500: #d49a2a;
+  --color-gold-600: #b07a1a;
+
+  --color-ivory-50: #fbf5e6;
+  --color-ivory-100: #f3e9d2;
+  --color-ivory-300: #d4c8ae;
+  --color-ivory-500: #a39580;
+
+  --color-songket-400: #cf5a47;
+  --color-songket-500: #b3402f;
+
+  --color-leaf-400: #86a46a;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-ink-950);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-ivory-100);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    color: var(--color-ivory-50);
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection {
+    background: rgb(230 185 79 / 0.35);
+    color: var(--color-ivory-50);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-400);
+    outline-offset: 3px;
+  }
+
+  [x-cloak] { display: none !important; }
+
+  img { max-width: 100%; }
+}
+
+@layer components {
+  /* ---------- Tombol ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.7rem 1.35rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .btn-gold {
+    background-color: var(--color-gold-400);
+    color: var(--color-ink-950);
+  }
+  .btn-gold:hover:not(:disabled) { background-color: var(--color-gold-300); }
+
+  .btn-line {
+    border: 1px solid rgb(243 233 210 / 0.28);
+    color: var(--color-ivory-50);
+  }
+  .btn-line:hover:not(:disabled) {
+    border-color: var(--color-gold-400);
+    color: var(--color-gold-300);
+  }
+
+  /* ---------- Isian formulir ---------- */
+  .field {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(243 233 210 / 0.16);
+    background-color: var(--color-ink-950);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+    color: var(--color-ivory-50);
+    transition: border-color 0.2s;
+  }
+  .field::placeholder { color: var(--color-ivory-500); }
+  .field:focus { border-color: var(--color-gold-400); outline: none; }
+  .field[aria-invalid='true'] { border-color: var(--color-songket-400); }
+
+  /* ---------- Bingkai lengkung (pintu Aceh) ---------- */
+  .arch {
+    border-radius: 50% 50% 1.25rem 1.25rem / 36% 36% 1.25rem 1.25rem;
+    overflow: hidden;
+  }
+
+  /* ---------- Pita motif bintang-bunga (kasab) ---------- */
+  .motif-band {
+    height: 14px;
+    background-repeat: repeat-x;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14' viewBox='0 0 28 14'%3E%3Cpath d='M14 1 21 7 14 13 7 7Z' fill='none' stroke='%23e6b94f' stroke-opacity='.55' stroke-width='1'/%3E%3Ccircle cx='14' cy='7' r='1.4' fill='%23e6b94f' fill-opacity='.7'/%3E%3Cpath d='M0 7h4M24 7h4' stroke='%23e6b94f' stroke-opacity='.35'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Cahaya hangat di hero ---------- */
+  .hero-glow {
+    background:
+      radial-gradient(60rem 32rem at 85% 10%, rgb(230 185 79 / 0.13), transparent 60%),
+      radial-gradient(40rem 28rem at 0% 100%, rgb(179 64 47 / 0.12), transparent 65%);
+  }
+
+  /* ---------- Teks panjang (cerita, hikayat) ---------- */
+  .prose-kupula p {
+    margin-top: 1.15em;
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    color: var(--color-ivory-300);
+    max-width: 68ch;
+  }
+  .prose-kupula p:first-child { margin-top: 0; }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* Satu gerakan terarah saat halaman dibuka: hero masuk berurutan. */
+@keyframes kupula-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-rise {
+  opacity: 0;
+  animation: kupula-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+.hero-rise:nth-child(2) { animation-delay: 0.08s; }
+.hero-rise:nth-child(3) { animation-delay: 0.16s; }
+.hero-rise:nth-child(4) { animation-delay: 0.24s; }
+.hero-rise:nth-child(5) { animation-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-rise { opacity: 1; animation: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
